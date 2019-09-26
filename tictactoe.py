@@ -11,23 +11,9 @@ def clear_screen():
     _ = system('cls') if name == 'nt' else system('clear')
 
 
-def new_game():
-    played_positions = []
-    play = input('Do you want to play?')
-    player1 = input('Want to be X or O?')
-    player2 = 'o' if player1 == 'x' else 'x'
-    player = 1
-
-    if play.lower() == 'yes' or 'y':
-        board = create_board()
-    else:
-        print('Goodbye!')
-        exit
-
-
 def create_board():
     '''
-    creates an empty tic tac toe board
+    creates an empty board
     '''
     board = [["  -  " for i in range(3)] for i in range(3)]
     return board
@@ -74,7 +60,7 @@ def play_letter(board, position, player, played_positions):
     return board
 
 
-def swap_players(player):
+def swap(player):
     '''
     toggles player 1 or 2 based on previous value
     '''
@@ -114,16 +100,22 @@ def check_win(board):
 
 
 if __name__ == "__main__":
-    new_game()
+    play = input('Do you want to play?')
+    player1 = input('Want to be X or O?')
+    player2 = 'o' if player1 == 'x' else 'x'
+    played_positions = []
+    player = 1
 
-    while play.lower() == 'yes' or 'y' and len(played_positions) < 9:
+    board = create_board() if play.lower() == 'yes' or 'y' else exit
+
+    while len(played_positions) < 9:
         clear_screen()
         display_board(board)
         position = int(input('Which square do you want to play in? (1-9)'))
         play_letter(board, position, player, played_positions)
         clear_screen()
         display_board(board)
-        player = swap_players(player)
+        player = swap(player)
 
     if len(played_positions) == 9:
         check_win(board)
