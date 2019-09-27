@@ -75,14 +75,14 @@ def check_win(board):
 
     found = False
 
-    # check row win
+    # check row win by looking for set rows of length 1
     for row in board:
         if len(set(row)) == 1:
             print(row[0] + ' wins!')
             found = True
             return
 
-    # check column win
+    # check column win. zip transposes the board
     for column in zip(*board):
         if len(set(column)) == 1:
             print(column[0] + ' wins!')
