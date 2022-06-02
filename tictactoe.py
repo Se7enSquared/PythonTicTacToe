@@ -15,8 +15,7 @@ def create_board():
     '''
     creates an empty board
     '''
-    board = [["  -  " for i in range(3)] for i in range(3)]
-    return board
+    return [["  -  " for _ in range(3)] for _ in range(3)]
 
 
 def display_board(board):
@@ -78,21 +77,21 @@ def check_win(board):
     # check row win by looking for set rows of length 1
     for row in board:
         if len(set(row)) == 1:
-            print(row[0] + ' wins!')
+            print(f'{row[0]} wins!')
             found = True
             return
 
     # check column win. zip transposes the board
     for column in zip(*board):
         if len(set(column)) == 1:
-            print(column[0] + ' wins!')
+            print(f'{column[0]} wins!')
             found = True
             return
 
     # check diagonal win
     if (board[1][1] == board[0][0] and board[1][1] == board[2][2])\
             or (board[1][1] == board[0][2] and board[1][1] == board[2][0]):
-        print(board[1][1] + ' wins!')
+        print(f'{board[1][1]} wins!')
         found = True
         return
 
